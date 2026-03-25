@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Convite de Casamento 💌</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#fff;
+    text-align:center;
+    padding:20px;
+    overflow-x:hidden;
+}
+
+/* CORAÇÕES */
+.coracao{
+    position:fixed;
+    top:-20px;
+    font-size:18px;
+    animation:cair linear infinite;
+    z-index:0;
+}
+
+@keyframes cair{
+    0%{
+        transform:translateY(-20px) scale(1);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(100vh) scale(1.3);
+        opacity:0;
+    }
+}
+
+/* CONTAINER */
+.container{
+    max-width:700px;
+    margin:auto;
+    padding:10px;
+    position:relative;
+    z-index:1;
+}
+
+/* TITULO */
+h1{
+    color:#d4af37;
+    margin-bottom:25px;
+    font-size:28px;
+}
+
+/* CARD */
+.card{
+    background:white;
+    padding:35px 25px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* TEXTO */
+.card p{
+    line-height:1.8;
+    margin-bottom:15px;
+    font-size:15px;
+}
+
+/* INPUTS */
+input, select{
+    width:100%;
+    padding:14px;
+    margin-top:12px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    font-size:15px;
+}
+
+/* BOTÃO */
+button{
+    margin-top:25px;
+    background:#d4af37;
+    color:white;
+    padding:14px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    width:100%;
+    font-size:16px;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+/* MAPA */
+.btn-mapa{
+    display:inline-block;
+    margin-top:15px;
+    background:#d4af37;
+    color:white;
+    padding:12px 25px;
+    border-radius:25px;
+    text-decoration:none;
+}
+
+/* NOMES */
+.lista-nomes input{
+    margin-top:10px;
+}
+
+/* SUCESSO */
+.sucesso{
+    margin-top:20px;
+    color:green;
+    display:none;
+    font-weight:600;
+}
+
+/* PLAYER LUXO */
+.player-ativo button{
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.15);}
+    100%{transform:scale(1);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Você está convidado! 💍</h1>
+
+<div class="card">
+
+<p>
+Com muita alegria, convidamos você e sua família para fazerem parte de um dos momentos mais importantes das nossas vidas. 💛
+</p>
+
+<p>
+Esse dia foi preparado com muito amor, carinho e dedicação, e não faria sentido vivê-lo sem a presença de pessoas especiais como vocês.
+</p>
+
+<p>
+Queremos celebrar, sorrir, viver cada instante e guardar memórias inesquecíveis ao lado de quem faz parte da nossa história.
+</p>
+
+<p>
+Sua presença tornará esse momento ainda mais único e significativo para nós. ✨
+</p>
+
+<p><b>📅 17 de Outubro de 2026</b></p>
+
+<a href="https://maps.app.goo.gl/AAxvEx6Ga3pkBY1m6" target="_blank" class="btn-mapa">
+📍 Ver Local da Cerimônia
+</a>
+
+<br>
+
+<a href="https://maps.app.goo.gl/WGMYQ9ELWqTduqWQ8" target="_blank" class="btn-mapa">
+🎉 Ver Local da Festa
+</a>
+
+<hr style="margin:25px 0">
+
+<h2>Confirmação de Presença</h2>
+
+<input type="text" id="familia" placeholder="Nome da família (ex: Família Silva)">
+
+<select id="quantidade" onchange="gerarCampos()">
+<option value="">Quantas pessoas irão?</option>
+<option value="1">1 pessoa</option>
+<option value="2">2 pessoas</option>
+<option value="3">3 pessoas</option>
+<option value="4">4 pessoas</option>
+<option value="5">5 pessoas</option>
+<option value="6">6 pessoas</option>
+<option value="7">7 pessoas</option>
+<option value="8">8 pessoas</option>
+
+</select>
+
+<div class="lista-nomes" id="lista"></div>
+
+<select id="presenca">
+<option value="">Todos irão?</option>
+<option value="Sim">Sim, todos</option>
+<option value="Não">Nem todos irão</option>
+</select>
+
+<button onclick="confirmar()">Confirmar Presença</button>
+
+<div class="sucesso" id="msg">
+Confirmado com sucesso! 🤍
+</div>
+
+</div>
+
+<!-- LISTA DE PRESENTES -->
+<div style="margin-top:40px;">
+<h2>Lista de Presentes 🎁</h2>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:15px; margin-top:15px;">
+
+<div style="background:white; padding:10px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.08);">
+<img src="fotos/presente1.jpg" style="width:100%; border-radius:10px;">
+<a href="COLE_O_LINK_AQUI" target="_blank" class="btn-mapa">Ver presente</a>
+</div>
+
+<div style="background:white; padding:10px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.08);">
+<img src="fotos/presente2.jpg" style="width:100%; border-radius:10px;">
+<a href="COLE_O_LINK_AQUI" target="_blank" class="btn-mapa">Ver presente</a>
+</div>
+
+<div style="background:white; padding:10px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.08);">
+<img src="fotos/presente3.jpg" style="width:100%; border-radius:10px;">
+<a href="COLE_O_LINK_AQUI" target="_blank" class="btn-mapa">Ver presente</a>
+</div>
+
+<br>
+
+</div>
+</div>
+
+<!-- PIX -->
+<div style="margin-top:40px;">
+<h2>Contribuição 💛</h2>
+
+<button onclick="copiarPix()" class="btn-mapa">
+Copiar PIX
+</button>
+</div>
+
+</div>
+
+<!-- PLAYER CORRIGIDO -->
+<div style="position:fixed; bottom:15px; right:15px; background:#fff; padding:10px 15px; border-radius:30px; box-shadow:0 5px 15px rgba(0,0,0,0.1); display:flex; align-items:center; justify-content:center; gap:10px; z-index:999;">
+<button onclick="toggleMusic()" style="background:#d4af37; border:none; color:white; border-radius:50%; width:35px; height:35px; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:0; font-size:16px;">
+▶
+</button>
+<span style="font-size:12px; color:#555;">Play Música💖</span>
+</div>
+
+<audio id="musica" autoplay muted loop>
+<source src="musica/musica.mp3">
+</audio>
+
+<script>
+
+/* CORAÇÕES */
+function criarCoracao(){
+    const coracao = document.createElement("div");
+    coracao.classList.add("coracao");
+    coracao.innerHTML = "💛";
+
+    coracao.style.left = Math.random() * 100 + "vw";
+    coracao.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+    document.body.appendChild(coracao);
+
+    setTimeout(()=>{
+        coracao.remove();
+    },6000);
+}
+
+setInterval(criarCoracao, 300);
+
+/* GERAR CAMPOS DE NOMES */
+function gerarCampos(){
+let qtd = parseInt(document.getElementById("quantidade").value);
+let lista = document.getElementById("lista");
+
+lista.innerHTML="";
+
+if(!qtd) return;
+
+for(let i=1;i<=qtd;i++){
+    lista.innerHTML += `
+    <input type="text" class="nomePessoa" placeholder="Nome da pessoa ${i}">
+    `;
+}
+}
+
+/* CONFIRMAR */
+function confirmar(){
+
+let familia = document.getElementById("familia").value.trim();
+let presenca = document.getElementById("presenca").value;
+let nomesInputs = document.querySelectorAll(".nomePessoa");
+
+if(familia === "" || presenca === "" || nomesInputs.length === 0){
+    alert("Preencha todos os campos!");
+    return;
+}
+
+let nomes = [];
+let erro = false;
+
+nomesInputs.forEach(input=>{
+    if(input.value.trim() === ""){
+        erro = true;
+    } else {
+        nomes.push(input.value.trim());
+    }
+});
+
+if(erro){
+    alert("Preencha o nome de todas as pessoas!");
+    return;
+}
+
+/* MONTAR MENSAGEM */
+let mensagem = `Olá! Gostaria de confirmar a presença no casamento!
+
+Família: ${familia}
+Quantidade: ${nomes.length}
+Nomes: ${nomes.join(", ")}
+Presença: ${presenca}`;
+
+/* CODIFICAR PRA URL */
+let mensagemCodificada = encodeURIComponent(mensagem);
+
+/* SEU NÚMERO */
+let numero = "5582999357319";
+
+/* ABRIR WHATSAPP */
+let url = `https://wa.me/${numero}?text=${mensagemCodificada}`;
+
+window.open(url, "_blank");
+
+/* MOSTRAR CONFIRMAÇÃO */
+document.getElementById("msg").style.display="block";
+
+}
+
+/* MUSICA */
+let music = document.getElementById("musica");
+let playing = false;
+
+window.addEventListener("load", ()=>{
+    music.play().then(()=>{
+        playing = true;
+        setTimeout(()=>{
+            music.muted = false;
+        },1000);
+    }).catch(()=>{});
+});
+
+document.body.addEventListener("click", ()=>{
+    music.muted = false;
+    music.play();
+    playing = true;
+}, {once:true});
+
+function toggleMusic(){
+    let player = document.querySelector('[style*="position:fixed"] button').parentElement;
+    let texto = player.querySelector("span");
+    let botao = player.querySelector("button");
+
+    if(playing){
+        fadeOut();
+        botao.innerHTML = "▶";
+        texto.innerHTML = "Play Música💖";
+        player.classList.remove("player-ativo");
+        playing=false;
+    }else{
+        music.muted = false;
+        music.play();
+        fadeIn();
+        botao.innerHTML = "⏸";
+        texto.innerHTML = "Tocando 🎶";
+        player.classList.add("player-ativo");
+        playing=true;
+    }
+}
+
+/* FADE SUAVE */
+function fadeIn(){
+    music.volume = 0;
+    let vol = 0;
+    let fade = setInterval(()=>{
+        if(vol < 1){
+            vol += 0.05;
+            music.volume = vol;
+        }else{
+            clearInterval(fade);
+        }
+    },100);
+}
+
+function fadeOut(){
+    let vol = music.volume;
+    let fade = setInterval(()=>{
+        if(vol > 0){
+            vol -= 0.05;
+            music.volume = vol;
+        }else{
+            music.pause();
+            clearInterval(fade);
+        }
+    },100);
+}
+
+/* QUANDO COMEÇAR AUTOMATICO */
+window.addEventListener("load", ()=>{
+    let player = document.querySelector('[style*="position:fixed"]');
+    let texto = player.querySelector("span");
+    let botao = player.querySelector("button");
+
+    setTimeout(()=>{
+        if(playing){
+            botao.innerHTML = "⏸";
+            texto.innerHTML = "Tocando 🎶";
+            player.classList.add("player-ativo");
+            fadeIn();
+        }
+    },1500);
+});
+
+/* PIX */
+function copiarPix(){
+    navigator.clipboard.writeText("(82) 99935-7319");
+    alert("PIX copiado!");
+}
+
+</script>
+
+</body>
+</html>
